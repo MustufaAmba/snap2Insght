@@ -36,6 +36,7 @@ const ProductTableCustomHead
                   direction={orderBy === headCell.id ? order : 'asc'}
                   onClick={() => onSort(headCell.id)}
                   IconComponent={ArrowDropDownIcon}
+                  className='font-semibold'
                   sx={{
                     textTransform: 'capitalize',
                     '.MuiTableSortLabel-icon': {

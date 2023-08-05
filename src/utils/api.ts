@@ -1,3 +1,5 @@
+import { SortOrderType } from "@/types/productTable";
+
 export const uploadFile= async(body:FormData)=>{
     try{
         const response = await fetch("/api/upload", {
@@ -10,9 +12,9 @@ export const uploadFile= async(body:FormData)=>{
         console.log(e)
     }
 }
-export const getFiles= async()=>{
+export const getFiles= async(sortOrder:SortOrderType)=>{
     try{
-        const response = await fetch("/api/get", {
+        const response = await fetch(`/api/get?sort=${sortOrder}`, {
             method: "GET",
           });
           return await response.json()

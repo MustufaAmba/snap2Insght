@@ -19,8 +19,7 @@ export const config = {
 const basePath = path.join(__dirname, '../../../../public/files')
 
 const saveProductDetails = async (file: formidable.File[]) => {
-  const { newFilename, originalFilename, filepath } = file[0]
-  // const data = fs.readFileSync(`${basePath}/${originalFilename}`,'utf-8')
+  const {  originalFilename, filepath } = file[0]
   const imageUUID = originalFilename?.split('.')[0]
   const isProductsExists = await ProductSchema.findOne({ imageUUID })
   if(!isProductsExists)
@@ -69,7 +68,6 @@ const saveImage = async (file: formidable.File[]) => {
       .catch((error) => console.log(error));
   }
 
-  // fs.unlinkSync(filePath);
 }
 
 const postReq = async (req: NextApiRequest, res: NextApiResponse) => {
@@ -92,7 +90,7 @@ const postReq = async (req: NextApiRequest, res: NextApiResponse) => {
 }
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
-  req.method === 'POST' ? postReq(req, res) : res.status(500).json({ message: 'Internal server error' });
+ return req.method === 'POST' ? postReq(req, res) : res.status(500).json({ message: 'Internal server error' });
 };
 
 export default connectDB(handler);

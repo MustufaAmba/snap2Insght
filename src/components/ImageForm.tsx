@@ -33,7 +33,6 @@ const ImageForm = () => {
 
     const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault()
-        console.log({ imageData })
         const { file: imageFile } = imageData.image
         const { file: analyticsFile } = imageData.analytics
         if (imageFile && analyticsFile) {

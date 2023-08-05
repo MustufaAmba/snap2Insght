@@ -12,7 +12,7 @@ const getReq = async (req: NextApiRequest, res: NextApiResponse) => {
 }
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
-  req.method === 'GET' ? getReq(req, res) : res.status(500).json({ message: 'Internal server error' });
+ return req.method === 'GET' ? getReq(req, res) : res.status(500).json({ message: 'Internal server error' });
 };
 
 export default connectDB(handler);
