@@ -59,6 +59,7 @@ const ImageForm = () => {
 
     return (
         <div className='pl-14'>
+            <p className='my-2 font-medium'>Please upload proper image and analytics file else application will not work as expected</p>
             <form onSubmit={handleSubmit}>
                 <div className='flex flex-col items-start gap-5 w-full'>
                     <div className='flex gap-4 items-center'>
