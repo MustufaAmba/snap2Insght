@@ -72,7 +72,6 @@ const saveImage = async (file: formidable.File[]) => {
 
 const postReq = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
-    console.log("inside")
     const form = new formidable.IncomingForm({ uploadDir: basePath, maxFileSize: 200 * 1024 * 1024 })
     form.parse(req, async (error, fields, files) => {
       const { imageFile, analyticsFile } = files

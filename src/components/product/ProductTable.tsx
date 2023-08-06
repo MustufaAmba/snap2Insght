@@ -15,15 +15,13 @@ const ProductTable: FC<IProductTableProps> = ({
     tableColumnSource,
     onTableAction,
     loading,
-    totalRows,
-    isPagination = true,
 }) => {
-    const { order, orderBy, onSort, page, rowsPerPage, onChangeRowsPerPage, onChangePage } =
+    const { order, orderBy, onSort} =
         useTable();
     const { setCurrentProduct } = useProduct()
     useEffect(() => {
-        onTableAction(page, order, orderBy, rowsPerPage);
-    }, [page, order, orderBy, rowsPerPage]);
+        onTableAction( order, orderBy );
+    }, [ order, orderBy]);
 
     const handleRowClick = (product: IProduct) => {
         setCurrentProduct(product)
@@ -41,7 +39,7 @@ const ProductTable: FC<IProductTableProps> = ({
                         onSort={(key) => onSort(key)}
                     />
                     <TableBody>
-                        {(loading ? <CircularProgress /> : tableDataSource.map((product,rowIndex) => {
+                        {(loading ? <CircularProgress /> : tableDataSource.map((product, rowIndex) => {
                             return <TableRow onClick={() => handleRowClick(product)} className='cursor-pointer' key={`${product.upc}-${rowIndex}`}>
                                 {
                                     tableColumnSource.map(({ id }) => {
@@ -55,35 +53,6 @@ const ProductTable: FC<IProductTableProps> = ({
                         )}
                     </TableBody>
                 </Table>
-                {isPagination ? (
-                
-                        <TablePagination
-                            className='w-full flex justify-end'
-                            rowsPerPageOptions={[5, 10, 25, { label: 'All', value: -1 }]}
-                            count={totalRows}
-                            rowsPerPage={rowsPerPage}
-                            page={page}
-                            SelectProps={{
-                                inputProps: {
-                                    'aria-label': 'rows per page',
-                                },
-                                native: true,
-                            }}
-                            onPageChange={onChangePage}
-                            onRowsPerPageChange={onChangeRowsPerPage}
-                        />
-
-                    //   <TablePaginationCustom
-                    //     count={totalRows}
-                    //     page={page}
-                    //     isPagination={isPagination}
-                    //     isLoadMore={isLoadMore}
-                    //     totalRowsInTable={tableDataSource.length}
-                    //     rowsPerPage={rowsPerPage}
-                    //     onPageChange={onChangePage}
-                    //     onRowsPerPageChange={onChangeRowsPerPage}
-                    //   />
-                ) : null}
             </TableContainer>
         </Box>
     );

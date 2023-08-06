@@ -18,16 +18,17 @@ const visuallyHidden = {
 } as const;
 
 const ProductTableCustomHead
-: FC<IProductTableHeadProps> = ({ order, orderBy, headLabel, onSort }) => {
-  return (
-    <TableHead>
-      <TableRow>
-        {headLabel.map((headCell, index) =>
-       
-        (
+  : FC<IProductTableHeadProps> = ({ order, orderBy, headLabel, onSort }) => {
+    return (
+      <TableHead>
+        <TableRow>
+          {headLabel.map((headCell, index) =>
+
+          (
             <TableCell
               key={`${headCell.id}${index}`}
               align={headCell.align || 'left'}
+
               sortDirection={orderBy === headCell.id ? order : false}>
               {onSort && headCell.isSortable ? (
                 <TableSortLabel
@@ -52,14 +53,15 @@ const ProductTableCustomHead
                   ) : null}
                 </TableSortLabel>
               ) : (
-                headCell.label
+                <p className='font-semibold'>      {headCell.label}</p>
+
               )}
             </TableCell>
           )
-        )}
-      </TableRow>
-    </TableHead>
-  );
-};
+          )}
+        </TableRow>
+      </TableHead>
+    );
+  };
 export default ProductTableCustomHead
-;
+  ;

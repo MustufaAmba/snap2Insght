@@ -17,10 +17,8 @@ export interface IProductTableColumn  {
   export interface IProductTableProps  {
     tableDataSource:IProduct[]|[];
     tableColumnSource: IProductTableColumn[];
-    onTableAction: (page: number, order: SortOrderType, orderBy: string, pageSize: number) => void;
+    onTableAction: ( order: SortOrderType, orderBy: string) => void;
     loading: boolean;
-    totalRows: number;
-    isPagination?: boolean;
   };
   export interface IProduct {
     imageUUID:string,

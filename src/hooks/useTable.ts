@@ -7,9 +7,6 @@ export default function useTable() {
 
   const [order, setOrder] = useState<SortOrderType>('desc');
 
-  const [page, setPage] = useState(1);
-
-  const [rowsPerPage, setRowsPerPage] = useState(5);
 
   const onSort = useCallback(
     (id: string) => {
@@ -22,29 +19,14 @@ export default function useTable() {
     [order, orderBy]
   );
 
-  const onChangePage = useCallback((event: unknown, newPage: number) => {
-    setPage(newPage);
-  }, []);
-
-  const onChangeRowsPerPage = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
-    setPage(1);
-    setRowsPerPage(parseInt(event.target.value, 10));
-  }, []);
 
   return {
     order,
-    page,
     orderBy,
-    rowsPerPage,
-    //
     //
     onSort,
-    onChangePage,
-    onChangeRowsPerPage,
     //
-    setPage,
     setOrder,
     setOrderBy,
-    setRowsPerPage
   };
 }

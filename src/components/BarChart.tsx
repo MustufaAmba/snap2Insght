@@ -21,9 +21,6 @@ ChartJS.register(
     Legend
 );
 
-
-
-
 const BarChart: FC<{ products: IProduct[] }> = ({ products }) => {
     const [brandOptions, setBrandOptions] = useState<string[]>([])
     const [brand, setBrand] = useState('')
@@ -51,7 +48,6 @@ const BarChart: FC<{ products: IProduct[] }> = ({ products }) => {
         const top = (filteredBrands.filter((brand)=>brand.shelfLevel==='Top').length*100)/filteredBrands.length
         const middle = (filteredBrands.filter((brand)=>brand.shelfLevel==='Middle').length*100)/filteredBrands.length
         const bottom= (filteredBrands.filter((brand)=>brand.shelfLevel==='Bottom').length*100)/filteredBrands.length
-
         setData({
             labels: ['Top', 'Middle', 'Bottom'],
             datasets: [
@@ -91,7 +87,7 @@ const BarChart: FC<{ products: IProduct[] }> = ({ products }) => {
     return <div className='w-[600px] h-96'>
         <InputLabel id="brand-select">Select a brand</InputLabel>
         <Select
-            value={brand||brandOptions[0]}
+            value={brand}
             labelId="brand-select"
             className='w-72'
             label='Select a brand'
@@ -105,7 +101,7 @@ const BarChart: FC<{ products: IProduct[] }> = ({ products }) => {
             }
 
         </Select>
-        {data&&<Bar options={options} data={data} />}
+        {data&&brand&&<Bar options={options} data={data} />}
     </div>
 }
 export default BarChart

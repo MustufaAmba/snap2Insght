@@ -32,23 +32,28 @@ const ImageForm = () => {
     }
 
     const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
-        event.preventDefault()
-        const { file: imageFile } = imageData.image
-        const { file: analyticsFile } = imageData.analytics
-        if (imageFile && analyticsFile) {
-            const body = new FormData();
-            body.append("imageFile", imageFile);
-            body.append("analyticsFile", analyticsFile)
-            const response = await uploadFile(body)
-            setImageDate({
-                image: {
-                    url: '',
-                    file: null
-                },
-                analytics: {
-                    file: null
-                }
-            })
+        try {
+            event.preventDefault()
+            const { file: imageFile } = imageData.image
+            const { file: analyticsFile } = imageData.analytics
+            if (imageFile && analyticsFile) {
+                const body = new FormData();
+                body.append("imageFile", imageFile);
+                body.append("analyticsFile", analyticsFile)
+                await uploadFile(body)
+                setImageDate({
+                    image: {
+                        url: '',
+                        file: null
+                    },
+                    analytics: {
+                        file: null
+                    }
+                })
+            }
+        }
+        catch (e) {
+            console.log(e)
         }
     }
 
@@ -76,27 +81,7 @@ const ImageForm = () => {
                     </div>
                     <button type='submit' className='border-2 border-blue-400 px-6 py-2 rounded-md' >Submit</button>
                 </div>
-
             </form>
-
-
-            {/* {
-                imageData.image.url?<img src={imageData.image.url} className='border border-neutral-950 object-contain w-full h-full rounded-lg'/>: <div className=''>
-                <label htmlFor='image' className='border border-neutral-950 rounded-lg w-[50vw] h-[50vh] flex justify-center items-center'>
-                    Upload Image
-                </label>
-                <input id='image' name='image' type='file' className='hidden' onChange={handleFileChange}/>
-                </div>
-            }
-            <div className='border border-neutral-950 rounded-lg w-full h-full flex justify-center items-center'>
-            <label htmlFor='image' className=''>
-                Upload Analytics
-            </label>
-            <input id='image' name='analytics' type='file' className='hidden'  onChange={handleFileChange}/>
-            </div>
-            <button onClick={()=>handleSubmit()}>
-                Submit
-            </button> */}
         </div>
     )
 }
